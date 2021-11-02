@@ -1,4 +1,8 @@
-﻿CREATE
+﻿-- Database: bookishDB
+
+-- DROP DATABASE "bookishDB";
+
+CREATE
 DATABASE "bookishDB"
     WITH 
     OWNER = bookish
