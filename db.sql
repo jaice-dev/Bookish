@@ -33,7 +33,7 @@ CREATE TABLE book_author
 CREATE TABLE copies
 (
     id serial PRIMARY KEY,
-    FOREIGN KEY (book_id) REFERENCES book (id)
+    FOREIGN KEY (book_id) REFERENCES book (id),
 )
 
 CREATE TABLE user
@@ -41,7 +41,7 @@ CREATE TABLE user
     id         serial PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name  VARCHAR(50) NOT NULL,
-    address    VARCHAR(100)
+    address    VARCHAR(100),
 )
 
 CREATE TABLE lending
