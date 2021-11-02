@@ -2,8 +2,7 @@
 
 -- DROP DATABASE "bookishDB";
 
-CREATE
-DATABASE "bookishDB"
+CREATE DATABASE "bookishDB"
     WITH 
     OWNER = bookish
     ENCODING = 'UTF8'
@@ -17,43 +16,43 @@ CREATE TABLE book
     id               serial PRIMARY KEY,
     title            VARCHAR(100) NOT NULL,
     publication_year SMALLINT,
-    isbn             VARCHAR(13) UNIQUE,
+    isbn             VARCHAR(13) UNIQUE
 );
 
 CREATE TABLE author
 (
     id         serial PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
-    last_name  VARCHAR(50) NOT NULL,
-)
+    last_name  VARCHAR(50) NOT NULL
+);
 
 CREATE TABLE book_author
 (
     id serial PRIMARY KEY,
     FOREIGN KEY (book_id) REFERENCES book (id),
-    FOREIGN KEY (author_id) REFERENCES author (id),
-)
+    FOREIGN KEY (author_id) REFERENCES author (id)
+);
 
-CREATE TABLE copies
+CREATE TABLE print
 (
     id serial PRIMARY KEY,
-    FOREIGN KEY (book_id) REFERENCES book (id),
-)
+    FOREIGN KEY (book_id) REFERENCES book (id)
+);
 
-CREATE TABLE user
+CREATE TABLE customer
 (
     id         serial PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name  VARCHAR(50) NOT NULL,
-    address    VARCHAR(100),
-)
+    address    VARCHAR(100)
+);
 
 CREATE TABLE lending
 (
     id         serial PRIMARY KEY,
-    FOREIGN KEY (copy_id) REFERENCES copies (id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (print_id) REFERENCES print (id),
+    FOREIGN KEY (user_id) REFERENCES customer (id),
     start_date DATE NOT NULL DEFAULT CURRENT_DATE,
     end_date   DATE,
-    due_date   DATE NOT NULL DEFAULT CURRENT_DATE + '14 days':: INTERVAL,
-)
+    due_date   DATE NOT NULL DEFAULT CURRENT_DATE + '14 days':: INTERVAL
+);
