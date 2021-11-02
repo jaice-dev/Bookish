@@ -12,53 +12,53 @@ DATABASE "bookishDB"
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
-CREATE TABLE book
+CREATE TABLE Book
 (
-    id               serial PRIMARY KEY,
-    title            VARCHAR(100) NOT NULL,
-    publication_year SMALLINT,
-    isbn             VARCHAR(13) UNIQUE
+    Id               serial PRIMARY KEY,
+    Title            VARCHAR(100) NOT NULL,
+    PublicationYear SMALLINT,
+    Isbn             VARCHAR(13) UNIQUE
 );
 
-CREATE TABLE author
+CREATE TABLE Author
 (
-    id         serial PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name  VARCHAR(50) NOT NULL
+    Id         serial PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName  VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE book_author
+CREATE TABLE BookAuthor
 (
-    id        serial PRIMARY KEY,
-    book_id   int,
-    author_id int,
-    FOREIGN KEY (book_id) REFERENCES book (id),
-    FOREIGN KEY (author_id) REFERENCES author (id)
+    Id        serial PRIMARY KEY,
+    BookId   int,
+    AuthorId int,
+    FOREIGN KEY (BookId) REFERENCES Book (Id),
+    FOREIGN KEY (AuthorId) REFERENCES Author (Id)
 );
 
-CREATE TABLE print
+CREATE TABLE Print
 (
-    id      serial PRIMARY KEY,
-    book_id int,
-    FOREIGN KEY (book_id) REFERENCES book (id)
+    Id      serial PRIMARY KEY,
+    BookId int,
+    FOREIGN KEY (BookId) REFERENCES Book (Id)
 );
 
-CREATE TABLE customer
+CREATE TABLE Customer
 (
-    id         serial PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name  VARCHAR(50) NOT NULL,
-    address    VARCHAR(100)
+    Id         serial PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName  VARCHAR(50) NOT NULL,
+    Address    VARCHAR(100)
 );
 
 CREATE TABLE lending
 (
-    id         serial PRIMARY KEY,
-    print_id   int,
-    user_id    int,
-    FOREIGN KEY (print_id) REFERENCES print (id),
-    FOREIGN KEY (user_id) REFERENCES customer (id),
-    start_date DATE NOT NULL DEFAULT CURRENT_DATE,
-    end_date   DATE,
-    due_date   DATE NOT NULL DEFAULT CURRENT_DATE + '14 days':: INTERVAL
+    Id         serial PRIMARY KEY,
+    PrintId   int,
+    UserId    int,
+    FOREIGN KEY (PrintId) REFERENCES Print (Id),
+    FOREIGN KEY (UserId) REFERENCES Customer (Id),
+    StartDate DATE NOT NULL DEFAULT CURRENT_DATE,
+    EndDate   DATE,
+    DueDate   DATE NOT NULL DEFAULT CURRENT_DATE + '14 days':: INTERVAL
 );
