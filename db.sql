@@ -11,9 +11,9 @@ DATABASE "bookishDB"
 CREATE TABLE book
 (
     id               serial PRIMARY KEY,
-    title            VARCHAR(100)       NOT NULL,
+    title            VARCHAR(100) NOT NULL,
     publication_year SMALLINT,
-    isbn             VARCHAR(13) UNIQUE NOT NULL,
+    isbn             VARCHAR(13) UNIQUE,
 );
 
 CREATE TABLE author
@@ -51,6 +51,5 @@ CREATE TABLE lending
     FOREIGN KEY (user_id) REFERENCES user (id),
     start_date DATE NOT NULL DEFAULT CURRENT_DATE,
     end_date   DATE,
-    due_date   DATE NOT NULL DEFAULT CURRENT_DATE + '14 days':: INTERVAL
-
+    due_date   DATE NOT NULL DEFAULT CURRENT_DATE + '14 days':: INTERVAL,
 )
