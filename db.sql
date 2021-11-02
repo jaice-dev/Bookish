@@ -2,7 +2,8 @@
 
 -- DROP DATABASE "bookishDB";
 
-CREATE DATABASE "bookishDB"
+CREATE
+DATABASE "bookishDB"
     WITH 
     OWNER = bookish
     ENCODING = 'UTF8'
@@ -28,14 +29,17 @@ CREATE TABLE author
 
 CREATE TABLE book_author
 (
-    id serial PRIMARY KEY,
+    id        serial PRIMARY KEY,
+    book_id   int,
+    author_id int,
     FOREIGN KEY (book_id) REFERENCES book (id),
     FOREIGN KEY (author_id) REFERENCES author (id)
 );
 
 CREATE TABLE print
 (
-    id serial PRIMARY KEY,
+    id      serial PRIMARY KEY,
+    book_id int,
     FOREIGN KEY (book_id) REFERENCES book (id)
 );
 
@@ -50,6 +54,8 @@ CREATE TABLE customer
 CREATE TABLE lending
 (
     id         serial PRIMARY KEY,
+    print_id   int,
+    user_id    int,
     FOREIGN KEY (print_id) REFERENCES print (id),
     FOREIGN KEY (user_id) REFERENCES customer (id),
     start_date DATE NOT NULL DEFAULT CURRENT_DATE,
